@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} | Course Wise Grade Input {% endblock title %}
+{% block content %} 
+   <div class="container-fluid py-3">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{success}} alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+   <section class="container my-2 bg-dark w-75 text-light p-2">
+    <center>
+      <img style="width: 100px; height: 80px;" class="mt-2 mb-2" src="{% static 'image/logo.png' %}" alt="">
+    </center>
+    
+    <form action="" method="POST" class="row g-3 p-3">
+          {% csrf_token %}
+          <div class="col-md-6">
+            <label for="validationDefault01" class="form-label">Student ID</label>
+            <input type="text" name="studentID" class="form-control" id="validationDefault01" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="validationDefault01" class="form-label">Educational Year</label>
+            <input type="number" name="eduYear" class="form-control" id="validationDefault01" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">Educational Semester</label>
+            <select id="inputState" name="eduSemester" class="form-select">
+              <option>Select Semester</option>
+              <option>Spring</option>
+              <option>Summer</option>
+              <option>Autumn</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">Enrolled course</label>
+            <select id="inputState" name="course" class="form-select">
+              {% for course in courses %}
+                <option value="{{ course }}">{{ course }}</option>
+              {% endfor %}
+              <!-- <option>CSE303</option>
+              <option>CSE301</option>
+              <option>CSE316</option>
+              <option>CSE317</option>
+              <option>CSE307</option>
+              <option>CSE309</option> -->
+            </select>
+          </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Enrolled Section</label>
+          <input type="number" name="section" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-6">
+          <label for="inputState" class="form-label">Obtained Grade</label>
+          <select id="inputState" name="grade" class="form-select">
+            <option>Select Grade</option>
+            <option>A</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B</option>
+            <option>B-</option>
+            <option>C+</option>
+            <option>C</option>
+            <option>C-</option>
+            <option>D+</option>
+            <option>D</option>
+            <option>F</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+   </section>
+
+  </div>
+{% endblock content %} 

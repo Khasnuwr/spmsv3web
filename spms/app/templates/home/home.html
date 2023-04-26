@@ -1,0 +1,111 @@
+{% extends 'base/base.html' %}
+{% block title %} | Home {% endblock title %}
+{% block content %} 
+    <h5>Dashboard</h5>
+    <p>Welcome, {{user.first_name}} {{user.last_name}}</p>
+    {% if user.role == 'Student' %}
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Result</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Earned CGPA: {{cgpa}} </h6>
+                  <p class="card-text">Earned Credit: {{earned_credit}}</p>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body btn-dark">
+                  <h5 class="card-title">Academic Information</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Department Name: {{user.department}}</h6>
+                  <p class="card-text">School Name: {{user.department.schoolID}}</p>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Registration Information</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Not Available</h6>
+                    <p class="card-text">-</p>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Scholarship</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">No Scholarship</h6>
+                    <p class="card-text">-</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <hr style="margin-top: 2rem; margin-bottom: 2rem;">
+          <a class="btn btn-dark" href="{% url 'transcript' %}">Get Transcript</a>
+          <hr style="margin-top: 2rem; margin-bottom: 2rem;">
+        </div>
+        <div class="row">
+          <div class="col" style="width: 50%;">
+            <div class="card" >
+              <div class="card-body">
+                  <h5 class="card-title">PLO Analysis of {{user.first_name}} {{user.last_name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Department of {{user.department}}</h6>
+                  <p class="card-text">{{user.department.schoolID.schoolName}}</p>
+                  {% include 'home/student_plo.html' %}
+              </div>
+            </div>
+          </div>
+          <div class="col" style="width: 50%;">
+            <div class="card" >
+              <div class="card-body">
+                  <h5 class="card-title">Course-wise CO Analysis</h5>
+                  {% include 'home/student_co.html' %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if user.role == 'Faculty' %}
+      <div class="row">
+        <div class="col" style="width: 50%;">
+          <div class="card" >
+              <div class="card-body">
+                  <h5 class="card-title">PLO Analysis of Department of {{user.department}}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{user.department.schoolID.schoolName}}</h6>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">-</h6>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">-</h6>
+                  {% include 'home/facultyHome.html' %}
+              </div>
+          </div>
+        </div>
+        <div class="col" style="width: 50%;">
+          <div class="card" >
+              <div class="card-body">
+                  <h5 class="card-title">PLO Analysis of Student</h5>
+                  {% include 'home/faculty_home_po_student.html' %}
+              </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if user.role == 'Admin' %}
+      <div class="row">
+        <center>
+        <div class="col">
+          <div class="card" style="width: 50%;">
+            <div class="card-body">
+              <h5 class="card-title">Department-wise PLO Analysis</h5>
+              {% include 'home/admin_home.html' %}
+            </div>
+          </div>
+        </div>
+      </center>
+      </div>
+    {% endif %}
+{% endblock content %}
