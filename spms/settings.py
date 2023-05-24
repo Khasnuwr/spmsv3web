@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k3y&&se@amj37v9+t+#f14(5n2$0d^o1eukwu)n6yev3)xh$%b
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://spmsv3.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://spmsv3.up.railway.app', 'https://spmsv3.onrender.com']
 
 # Application definition
 
