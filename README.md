@@ -1,2 +1,2 @@
 # spmsv3web
-https://spmsv3.onrender.com/login/
+https://spmsv3.onrender.com/
